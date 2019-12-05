@@ -1,3 +1,8 @@
+# Notas del [curso](https://www.udemy.com/course/react-native-expo-creando-mini-tripadvisor-de-restaurantes/)
+
+Aqui se registraran las notas del curso, asi como observaciones o tips.
+
+
 # Instalar node.js
 
 Tomado de [tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-18-04)		
@@ -59,9 +64,6 @@ Manejador de dependencias o paquetes alternativa a npm
 	yarn global add expo-cli 
 
 
-
-
-
 # Crear proyecto con expo-cli
 
 	expo init miss-delicias	
@@ -76,5 +78,16 @@ Seleccionamos la plantilla y damos el nombre de la aplicación
 
 	yarn start
 
-Podemos leer el codigo QR, para ello debemos descargar la aplicación EXPO y crear una cuenta, en mi caso tuve que seleccionar en el navegador la conexión de tipo TUNNEL	
+## Cerrar proyecto
 
+	ctrl + c	
+
+Podemos leer el codigo QR, para ello debemos descargar la aplicación EXPO y crear una cuenta, en mi caso tuve que seleccionar en el navegador la conexión de tipo TUNNEL, lo cual permitio acceder desde la aplicación, la solución se encontro en el [foro](https://github.com/expo/expo-cli/issues/134)	
+
+<< The "Network response timed out" error means your phone can not connect to the Expo CLI running on your computer. Here are some things you can check:
+
+Is Expo CLI running? If not you can start it with expo start. Check that the URL matches the one shown in the Expo client app.
+Does the URL shown in the app point to the IP address or hostname of your computer?
+Is a firewall blocking access to this port (e.g. 19000) on your computer? If the firewall settings can't be changed, you might want to use the tunnel URL. Start Expo CLI with expo start --tunnel (or switch connection type in the sidebar of Expo Dev Tools). >>
+
+Al intentar hacer el uso d ela emulación con Android Studio, no encontre la opción para configurar dispositivos, por ende no se pudo continuar. con esa solución.(queda pendiente la validación con un emulador).
