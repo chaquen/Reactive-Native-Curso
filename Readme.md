@@ -91,3 +91,4 @@ Does the URL shown in the app point to the IP address or hostname of your comput
 Is a firewall blocking access to this port (e.g. 19000) on your computer? If the firewall settings can't be changed, you might want to use the tunnel URL. Start Expo CLI with expo start --tunnel (or switch connection type in the sidebar of Expo Dev Tools). >>
 
 Al intentar hacer el uso d ela emulación con Android Studio, no encontre la opción para configurar dispositivos, por ende no se pudo continuar. con esa solución.(queda pendiente la validación con un emulador).
+	
