@@ -90,5 +90,46 @@ Is Expo CLI running? If not you can start it with expo start. Check that the URL
 Does the URL shown in the app point to the IP address or hostname of your computer?
 Is a firewall blocking access to this port (e.g. 19000) on your computer? If the firewall settings can't be changed, you might want to use the tunnel URL. Start Expo CLI with expo start --tunnel (or switch connection type in the sidebar of Expo Dev Tools). >>
 
-Al intentar hacer el uso d ela emulación con Android Studio, no encontre la opción para configurar dispositivos, por ende no se pudo continuar. con esa solución.(queda pendiente la validación con un emulador).
+## Emular en Android Studio
+
+Para instalar sigas las instrucciones de la [pagina oficial](https://developer.android.com/studio/install) de android studio, luego ingrese a Android studio y cree un nuevo dispositivo, en caso de generarse un error de permisos ver error 1, luego de esto ejecute la aplicación y siga las instrucciones para emular en android, esto puede tardar un poco mientras se instala la aplicación en el emulador.
+
+### error 1
+Solucion error de permisos para descargar SDK, ver [link](https://stackoverflow.com/questions/37300811/android-studio-dev-kvm-device-permission-denied/45749003) 
+
+
 	
+
+# Notas de desarrollo
+
+
+Cambio a modo desarrollo
+	
+Ingrese a la carpeta del proyecto y acceda al archivo package.json y cambie el valor de la propiedad start por dev
+	
+	"start": "expo start",
+
+	"dev": "expo start",
+
+## Librerias
+
+Instalar librerias para agregar componenetes a el proyecto
+
+[Reactive Native Elements](https://react-native-elements.github.io/react-native-elements/docs/overview.html)
+
+	yarn add react-native-elements
+
+[Reactive Native Navigation](https://reactnavigation.org/docs/en/getting-started.html)
+
+	yarn add react-navigation
+
+	yarn add react-navigation-stack
+
+	yarn add react-navigation-tabs
+
+	yarn add react-native-gesture-handler@1.3.0
+
+	yarn add react-native-reanimated@1.2.0 
+
+
+
