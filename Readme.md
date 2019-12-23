@@ -97,7 +97,9 @@ Para instalar sigas las instrucciones de la [pagina oficial](https://developer.a
 ### error 1
 Solucion error de permisos para descargar SDK, ver [link](https://stackoverflow.com/questions/37300811/android-studio-dev-kvm-device-permission-denied/45749003) 
 
+ubicación Android Studio en mi equipo 
 
+	/usr/local/android-studio-ide-191.5977832-linux/android-studio/bin
 	
 
 # Notas de desarrollo
