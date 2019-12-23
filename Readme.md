@@ -134,4 +134,23 @@ Instalar librerias para agregar componenetes a el proyecto
 	yarn add react-native-reanimated@1.2.0 
 
 
+# Firebase
+
+## Paso 1.
+Crear una cuenta en firebase
+
+## Paso 2.
+Crear proyecto web en la pestaña Project Overview.
+
+## Paso 3.
+Copiar el script generado por Firebase.
+
+## Paso 4. 
+Instalar firebase en el proyecto
+	
+	yarn add firebase 
+
+## Paso 5.
+Agregar configuración de firebase ver archivo utils/Firebase.js
+
 

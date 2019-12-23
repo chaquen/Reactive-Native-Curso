@@ -5,7 +5,7 @@ export default function Search(){
 	return (
 
 		<View>
-			<Text>Search</Text>
+			<Text>Descubre nuevos restaurantes</Text>
 		</View>
 
 

@@ -5,7 +5,7 @@ export default function MyAccount(){
 
 	return (
 		<View>
-			<Text>My Account</Text>
+			<Text>Mi cuenta</Text>
 		</View>
 	);
 

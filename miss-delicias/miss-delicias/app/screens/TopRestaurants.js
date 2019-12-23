@@ -6,7 +6,7 @@ export default function TopRestaurants(){
 	return (
 
 		<View>
-			<Text>Top Restaurants</Text>
+			<Text>Los mejores restaurantes</Text>
 		</View>
 
 	);
