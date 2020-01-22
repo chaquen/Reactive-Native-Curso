@@ -10,8 +10,8 @@ function UserGuest(props){
 		<ScrollView style={styles.viewBody} centerContent={true}>
 			<Image 
 				source = {require("../../../assets/img/user-guest.jpg")}
-				style={styles.image}
-				resizeMode='contain'
+				style = {styles.image}
+				resizeMode = 'contain'
 			/>
 			<Text style={styles.title}>Consulta tu perfil en miss-delicias</Text>
 			<Text style={styles.description}>

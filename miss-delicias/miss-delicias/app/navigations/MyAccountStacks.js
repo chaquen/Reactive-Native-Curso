@@ -12,7 +12,7 @@ const MyAccountScreenStacks =  createStackNavigator({
 	Login: {
 		screen : LoginScreen,
 		navigationOptions:()=>({
-			title:"Login"
+			title:"Iniciar sesión"
 		})
 	}
 });
