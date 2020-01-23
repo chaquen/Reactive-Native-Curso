@@ -1,6 +1,7 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import  MyAccountScreen  from '../screens/account/MyAccount';
 import  LoginScreen  from '../screens/account/Login';
+import  RegisterScreen from '../screens/account/Register';
 
 const MyAccountScreenStacks =  createStackNavigator({
 	MyAccount: {
@@ -13,6 +14,12 @@ const MyAccountScreenStacks =  createStackNavigator({
 		screen : LoginScreen,
 		navigationOptions:()=>({
 			title:"Iniciar sesión"
+		})
+	},
+	Register: {
+		screen: RegisterScreen,
+		navigationOptions:()=>({
+			tittle:"Registro"
 		})
 	}
 });
