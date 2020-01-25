@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Image, Text } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import RegisterForm from '../../components/account/RegisterForm';
 
 export default function Register(){
 
@@ -12,7 +13,7 @@ export default function Register(){
 					resizeMode = 'contain'
 			/>
 			<View style={ styles.viewForm }>
-				<Text>Formulario de registro de usuarios</Text>
+				<RegisterForm />
 			</View>	
 		</KeyboardAwareScrollView>
 
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
 
 	},
 	viewForm:{
-		marginTop: 40,
+		marginRight: 40,
 		marginLeft: 40
 	}
 
