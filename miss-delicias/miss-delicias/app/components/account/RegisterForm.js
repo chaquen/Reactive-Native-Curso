@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {  StyleSheet, View } from 'react-native';
 import { Input, Icon, Button } from 'react-native-elements';
+import { validateEmail } from '../../utils/Validation';
 
 
 export default function RegisterForm(){
@@ -11,11 +12,18 @@ export default function RegisterForm(){
 	const [ confirmPassword, setConfirmPassword] = useState("");
 
 	const register = () => {
-		console.log("Usuario Registrado");
-		console.log("Email: "+ email);
-		console.log("Contraseña: "+ password);
-		console.log("Conformar contraseña: "+ confirmPassword);
-			
+
+		if(!email || !password || !confirmPassword){
+			console.log("Todos los campos son obligatorios");
+		}else{
+			if(!validateEmail(email)){
+				console.log("El email no es valido");
+			}else if(password !== confirmPassword){
+				console.log("Las contraseñas deben ser iguales");
+			}else{
+				console.log("Correcto..");
+			}
+		}			
 	};
 	
 	return (
