@@ -6,9 +6,16 @@ import { Input, Icon, Button } from 'react-native-elements';
 export default function RegisterForm(){
 	const [ hidePassword, setHidePassword] = useState(true);
 	const [ hideConfirmPassword, setHideConfirmPassword] = useState(true);
+	const [ email, setEmail] = useState("");
+	const [ password, setPassword] = useState("");
+	const [ confirmPassword, setConfirmPassword] = useState("");
 
 	const register = () => {
 		console.log("Usuario Registrado");
+		console.log("Email: "+ email);
+		console.log("Contraseña: "+ password);
+		console.log("Conformar contraseña: "+ confirmPassword);
+			
 	};
 	
 	return (
@@ -16,7 +23,7 @@ export default function RegisterForm(){
 			<Input
 				placeholder = "Correo electrónico"
 				containerStyle = { styles.inputForm }
-				onChange = { ()=> console.log('Correo electrónico actualizado')}
+				onChange = { e => setEmail(e.nativeEvent.text) }
 				rightIcon = {
 					<Icon
 						type= "material-community"
@@ -30,7 +37,7 @@ export default function RegisterForm(){
 				password= { true }
 				secureTextEntry={ hidePassword }
 				containerStyle = { styles.inputForm }
-				onChange = { ()=> console.log('Contraseña actualizada')}
+				onChange = { e => setPassword(e.nativeEvent.text) }
 				rightIcon = {
 					<Icon
 						type = "material-community"
@@ -46,7 +53,7 @@ export default function RegisterForm(){
 				password = { true }
 				secureTextEntry ={ hideConfirmPassword }
 				containerStyle = { styles.inputForm }
-				onChange = { ()=> console.log('Contraseña repetida actualizada')}
+				onChange = { e => setConfirmPassword(e.nativeEvent.text)}
 				rightIcon = {
 					<Icon
 						type= "material-community"
@@ -60,6 +67,7 @@ export default function RegisterForm(){
 				title = "Unirse"
 				containerStyle = { styles.btnContainerRegister}
 				buttonStyle = { styles.btnRegister }
+				onPress = { register }
 				
 			/>	
 			
