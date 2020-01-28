@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {  StyleSheet, View } from 'react-native';
 import { Input, Icon, Button } from 'react-native-elements';
 import { validateEmail } from '../../utils/Validation';
+import  * as firebase  from 'firebase';
 
 
 export default function RegisterForm(){
@@ -11,7 +12,7 @@ export default function RegisterForm(){
 	const [ password, setPassword] = useState("");
 	const [ confirmPassword, setConfirmPassword] = useState("");
 
-	const register = () => {
+	const register = async () => {
 
 		if(!email || !password || !confirmPassword){
 			console.log("Todos los campos son obligatorios");
@@ -21,7 +22,12 @@ export default function RegisterForm(){
 			}else if(password !== confirmPassword){
 				console.log("Las contraseñas deben ser iguales");
 			}else{
-				console.log("Correcto..");
+				await firebase
+					  .auth()
+					  .createUserWithEmailAndPassword(email,password)
+					  .then(()=>console.log("Usuario registrado"))
+					  .catch(()=>console.log("Error al crear el usuario"))
+
 			}
 		}			
 	};

@@ -153,4 +153,5 @@ Instalar firebase en el proyecto
 ## Paso 5.
 Agregar configuración de firebase ver archivo utils/Firebase.js
 
-
+## Paso 6.
+Habilitar el medio de acceso, para ello se debe ir a la consola de Firebase y en la opción Authentication, seleccionar el metodo que vamos a habilitar. 
