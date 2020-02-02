@@ -5,7 +5,8 @@ import { validateEmail } from '../../utils/Validation';
 import  * as firebase  from 'firebase';
 
 
-export default function RegisterForm(){
+export default function RegisterForm(props){
+	const { toastRef } = props;
 	const [ hidePassword, setHidePassword] = useState(true);
 	const [ hideConfirmPassword, setHideConfirmPassword] = useState(true);
 	const [ email, setEmail] = useState("");
@@ -15,18 +16,18 @@ export default function RegisterForm(){
 	const register = async () => {
 
 		if(!email || !password || !confirmPassword){
-			console.log("Todos los campos son obligatorios");
+			toastRef.current.show("Todos los campos son obligatorios");
 		}else{
 			if(!validateEmail(email)){
-				console.log("El email no es valido");
+				toastRef.current.show("El email no es valido");
 			}else if(password !== confirmPassword){
-				console.log("Las contraseñas deben ser iguales");
+				toastRef.current.show("Las contraseñas deben ser iguales");
 			}else{
 				await firebase
 					  .auth()
 					  .createUserWithEmailAndPassword(email,password)
-					  .then(()=>console.log("Usuario registrado"))
-					  .catch(()=>console.log("Error al crear el usuario"))
+					  .then(()=>toastRef.current.show("Usuario registrado"))
+					  .catch(()=>toastRef.current.show("Error al crear el usuario"))
 
 			}
 		}			
