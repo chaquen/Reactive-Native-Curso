@@ -6,6 +6,7 @@ import  * as firebase  from 'firebase';
 import Loading from '../Loading';
 import { withNavigation } from 'react-navigation';
 
+
 function RegisterForm(props){
 	const { toastRef,navigation } = props;
 
