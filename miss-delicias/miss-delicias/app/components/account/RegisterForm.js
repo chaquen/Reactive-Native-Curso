@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {  StyleSheet, View } from 'react-native';
 import { Input, Icon, Button } from 'react-native-elements';
-import { validateEmail } from '../../utils/Validation';
+import { validateEmail,validatePassword } from '../../utils/Validation';
 import  * as firebase  from 'firebase';
 import Loading from '../Loading';
 import { withNavigation } from 'react-navigation';
@@ -23,8 +23,8 @@ function RegisterForm(props){
 		}else{
 			if(!validateEmail(email)){
 				toastRef.current.show("El email no es valido");
-			}else if(password !== confirmPassword){
-				toastRef.current.show("Las contraseñas deben ser iguales");
+			}else if(!validatePassword(password,confirmPassword)){
+				toastRef.current.show("Las contraseñas deben ser iguales, ademas debe tener un tamaño de minimo 6 caracteres");
 			}else{
 				await firebase
 					  .auth()
@@ -32,7 +32,10 @@ function RegisterForm(props){
 					  .then(()=> 
 					  	navigation.navigate("MyAccount")
 					  )
-					  .catch(()=>toastRef.current.show("Error al crear el usuario"))
+					  .catch(
+						  ( error )=>toastRef.current.show(error.message)
+						  
+						  )
 
 			}
 		}	

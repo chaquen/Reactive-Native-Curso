@@ -16,7 +16,7 @@ export default function Register(){
 			<View style={ styles.viewForm }>
 				<RegisterForm toastRef= { toastRef } />
 			</View>	
-		<Toast ref={ toastRef } position = "top" opacity = { 0.7 } />
+		<Toast ref={ toastRef } position = "top" opacity = { 0.7 } fadeOutDuration={4000}/>
 		</KeyboardAwareScrollView>
 
 	);
