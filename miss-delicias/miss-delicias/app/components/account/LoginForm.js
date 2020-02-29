@@ -2,10 +2,12 @@ import React,{ useState } from 'react';
 import {validateEmail}  from '../../utils/Validation';
 import { StyleSheet, View } from 'react-native';
 import { Input, Icon, Button } from 'react-native-elements';
+import  * as firebase  from 'firebase';
+import { withNavigation } from 'react-navigation';
 import Loading from '../Loading';
 
 
-export default function LoginForm(props){
+function LoginForm(props){
     const { toastRef,navigation } = props;
     const [ hidePassword, setHidePassword] = useState(true);
     const [ password, setPassword] = useState("");
@@ -13,7 +15,7 @@ export default function LoginForm(props){
     const [ isVisibleLoading, setIsVisibleLoading ] = useState(false);
 
 
-    const Login = () => {
+    const Login = async () => {
         if(!email && !password){
             toastRef.current.show("Todos los campos son obligatorios");            
             return; 
@@ -24,15 +26,19 @@ export default function LoginForm(props){
             toastRef.current.show("Ingresa una contraseña");
             return; 
         }else{
-            //TO DO : Logica para login contra firebase
-            setIsVisibleLoading(!isVisibleLoading);
-            console.log('Login ok');
-            navigation.navigate("MyAccount")
+            setIsVisibleLoading(true);
+            await firebase  
+                  .auth()
+                  .signInWithEmailAndPassword(email,password)
+                  .then(()=> {
+                      setIsVisibleLoading(false)
+                      navigation.navigate("MyAccount")
+                  })
+                  .catch(() => {
+                      setIsVisibleLoading(false) 
+                      toastRef.current.show("Los datos ingresados no son correctos, por favor intente nuevamente")
+                  });               
         }
-        setIsVisibleLoading(false);
-
-        
-        
     };
     
     return (
@@ -74,7 +80,7 @@ export default function LoginForm(props){
         </View>
     );
 }
-
+export default withNavigation(LoginForm);
 const styles = StyleSheet.create({
     formContainer:{
         flex:1,

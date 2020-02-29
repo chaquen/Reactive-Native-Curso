@@ -19,7 +19,7 @@ export default function Login(props){
 			<View
 			    style = { styles.viewContainer }	
 			>
-				<LoginForm toastRef={toastRef} navigation={navigation}/>
+				<LoginForm toastRef={toastRef}/>
 				<CreateAccount navigation={navigation}/>
 			</View>
 			<Divider
@@ -27,7 +27,8 @@ export default function Login(props){
 			></Divider>
 			<View
 			    style = { styles.viewContainer }>
-				<Text> LOGIN FACEBOOK.</Text>
+				
+				<Text>/*TO DO:*/ LOGIN FACEBOOK. </Text>
 			</View>
 			<Toast
 				ref={toastRef}

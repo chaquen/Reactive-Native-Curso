@@ -4,16 +4,17 @@ import  LoginScreen  from '../screens/account/Login';
 import  RegisterScreen from '../screens/account/Register';
 /*El orden de esta pila es el orden en que se muestra la ventana de navegación a la que pertenecen*/
 const MyAccountScreenStacks =  createStackNavigator({
-	Login: {
-		screen : LoginScreen,
-		navigationOptions:()=>({
-			title:"Iniciar sesión"
-		})
-	},
+	
 	MyAccount: {
 		screen : MyAccountScreen,
 		navigationOptions:() => ({
 			title : "Mi cuenta"
+		})
+	},
+	Login: {
+		screen : LoginScreen,
+		navigationOptions:()=>({
+			title:"Iniciar sesión"
 		})
 	},
 	Register: {
