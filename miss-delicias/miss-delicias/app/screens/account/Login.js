@@ -28,7 +28,7 @@ export default function Login(props){
 			></Divider>
 			<View
 			    style = { styles.viewContainer }>				
-				<LoginFacebook />
+				<LoginFacebook toastRef={toastRef} navigation={navigation}/>
 			</View>
 			<Toast
 				ref={toastRef}

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useState } from "react";
 import { SocialIcon } from "react-native-elements";
 import * as firebase from "firebase";
 import * as Facebook from 'expo-facebook';
@@ -6,7 +6,10 @@ import { FacebookApi } from "../../utils/Social";
 import Loading from "../Loading";
 
 
-export default function LoginFacebook(){
+export default function LoginFacebook(props){
+    const { toastRef, navigation } = props;
+    const [ isVisibleLoading, setIsVisibleLoading ] = useState(false);
+
     const login = async () => {
         await Facebook.initializeAsync(FacebookApi.application_id);
         const { type, token } = await Facebook.logInWithReadPermissionsAsync(
@@ -15,30 +18,36 @@ export default function LoginFacebook(){
                                       );
         
                                       if(type === "success"){
+                                        setIsVisibleLoading(true);
                                         const credentials = firebase.auth.FacebookAuthProvider.credential(token);  
                                         await firebase
                                               .auth()
                                               .signInWithCredential(credentials)
                                               .then(()=>{
-                                                console.log("Bienvenidos desde facebook");    
+                                                setIsVisibleLoading(false)
+                                                navigation.navigate("MyAccount")
                                               })
                                               .catch(() => {
-                                                console.log("Error accediendo a facebook");    
+                                                toastRef.current.show("Error accediendo a facebook");    
                                               });  
                                         
                                       }else if(type === "cancel"){
-                                        console.log("Inicio de sesión cancelado");    
+                                        toastRef.current.show("Inicio de sesión cancelado");    
                                       }else{
-                                        console.log("Error desconocido, por favor intenete mas tarde");    
+                                        toastRef.current.show("Error desconocido, por favor intenete mas tarde");    
                                       }
+                                      setIsVisibleLoading(false);
     }
 
     return (
-        <SocialIcon 
-            title="Ingresa con Facebook"
-            button
-            type="facebook"
-            onPress={login}
-        />
+        <>
+            <SocialIcon 
+                title="Ingresa con Facebook"
+                button
+                type="facebook"
+                onPress={login}
+            />
+            <Loading isVisible={ isVisibleLoading } text="Ingresando"/>
+        </>
     );
 }
