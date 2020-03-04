@@ -155,3 +155,17 @@ Agregar configuración de firebase ver archivo utils/Firebase.js
 
 ## Paso 6.
 Habilitar el medio de acceso, para ello se debe ir a la consola de Firebase y en la opción Authentication, seleccionar el metodo que vamos a habilitar. 
+
+## ¿Cómo crear Login con facebook?
+
+Debes crear un aplicación en [facebook developer](https://developers.facebook.com/), allí deberas registrar las plataformas que deseas usar desde facebook, en nuestro caso IOS/Andoid, para ello ve al costado ixzquierdo y en el botón configuración > basico, 
+y al final de esa página debes agregar una plataforma debes agregar tantas plataformas como quieras en nuestro caso dos
+Para las palataformas debemos registrar una serie de datos en facebook, por eso debemos seguir las intrucciones de el siguiente [sitio](https://docs.expo.io/versions/latest/sdk/facebook/), 
+
+### Para IOS
+        Bundle ID >> host.exp.Exponent 
+### Para Android
+        Key Hashes >> rRW++LUjmZZ+58EbN5DVhGAnkX4=
+
+Luego de esto debemos registrar el nuevo medio de login en nuestra consola de firebase, una vez en la consola y dentro de nuestro proyecto habilitamos el nuevo medio de login en este caso login, allí debemos ingresar dos datos importantes que podremos obtener desde la misma ubicación donde registramos las plataformas en facebook, dichos datos son **App ID** y **App Secret**  
+
