@@ -169,3 +169,14 @@ Para las palataformas debemos registrar una serie de datos en facebook, por eso 
 
 Luego de esto debemos registrar el nuevo medio de login en nuestra consola de firebase, una vez en la consola y dentro de nuestro proyecto habilitamos el nuevo medio de login en este caso login, allí debemos ingresar dos datos importantes que podremos obtener desde la misma ubicación donde registramos las plataformas en facebook, dichos datos son **App ID** y **App Secret**  
 
+Una vez registrada la configuración debemos agregar el paquete expo-facebook
+    
+        yarn add expo-facebook
+
+### ERROR CON LOGIN FACEBOOK
+
+Al instalarse el paquete expo-facebook, genero un error en el que me indicaba que las versiones de expo(35.0) y facebook(8.0) no eran compatibles, sin embargo expo no funcionaba por lo que se tuvo que instalar globalmente de nuevo
+por favor seguir la guía [aqui descrita](https://github.com/expo/expo-cli/issues/591)
+    
+        sudo npm install -g --unsafe-perm expo-cli
+

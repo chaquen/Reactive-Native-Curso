@@ -8,6 +8,7 @@ import Loading from "../Loading";
 
 export default function LoginFacebook(){
     const login = async () => {
+        await Facebook.initializeAsync(FacebookApi.application_id);
         const { type, token } = await Facebook.logInWithReadPermissionsAsync(
                                             FacebookApi.application_id,
                                             { permissions: FacebookApi.permissions } 
