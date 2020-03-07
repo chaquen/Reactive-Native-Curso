@@ -196,7 +196,7 @@ Ejemplo de las reglas de firebase
 			}
 ### Modificando las reglas de firebase
 
-Ahora le indicamos que todos podrán leer los arhivos, pero que solo podran escribir en nuestra carpeta si esta logueado
+Ahora le indicamos que todos podrán leer los archivos, pero que solo podran escribir en nuestra carpeta si esta logueado
 
 
 		rules_version = '2';
