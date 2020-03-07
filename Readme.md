@@ -185,13 +185,30 @@ por favor seguir la guía [aqui descrita](https://github.com/expo/expo-cli/issue
 Debemos acceder a la consola de [firebase](https://console.firebase.google.com/) una vez allí, en la partae izquierda seleccionar la opción storage, dar siguiente, luego de ello, debemos seleccionar la ubicación, luego podremos modificar las reglas y crear las carpetas que necesitemos.
 
 Ejemplo de las reglas de firebase
+		
 		rules_version = '2';
 		service firebase.storage {
   			match /b/{bucket}/o {
-    			match /{allPaths=**} {
-  	    			allow read, write: if request.auth != null;
-    			}
+					match /{allPaths=**} {
+						allow read, write: if request.auth != null;
+					}
   				}
 			}
-			
+### Modificando las reglas de firebase
+
+Ahora le indicamos que todos podrán leer los arhivos, pero que solo podran escribir en nuestra carpeta si esta logueado
+
+
+		rules_version = '2';
+		service firebase.storage {
+		  match /b/{bucket}/o {
+		    match /{allPaths=**} {
+		      allow read;
+		      allow write: if request.auth != null;
+		    }
+		  }
+		}
+
+
+
 			
