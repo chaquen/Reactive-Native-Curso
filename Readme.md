@@ -209,6 +209,17 @@ Ahora le indicamos que todos podrán leer los archivos, pero que solo podran esc
 		  }
 		}
 
+## Accediendo a dispositivos del móvil
+
+### Permisos 
+
+Cuando queremos acceder a información sensible de nuestros usuarios, debemos solitar permisos para ello podemos usar el paquete [*expo-permissions*](https://docs.expo.io/versions/latest/sdk/permissions/)
+
+		expo install expo-permissions
 
 
+### Image Picker
 			
+Paraa cceder a la galeria de imagenes debemos instalar un paquete [*ImagePicker*](https://docs.expo.io/versions/latest/sdk/imagepicker/) que nos provve dicha funcionalidad, para instalarlo debemos ejecutar el comando:
+
+		expo install expo-image-picker
