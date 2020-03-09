@@ -8,38 +8,71 @@ import * as ImagePicker from 'expo-image-picker';
 export default function InfoUser(props){
     const {
         userInfo, 
-        userInfo: { uid,  displayName, email, photoURL }    
+        userInfo: { uid,  displayName, email, photoURL, providerId },
+        setReloadDataUser,   
+        toastRef,
+        setIsVisibleLoading,
+        setTextLoading 
     } = props;
+    
     const alterPhoto = "https://api.adorable.io/avatars/266/abott@adorable.png"
     const changeAvatar = async () => {
-        
-        const replyPermission = await Permisssions.askAsync(Permisssions.CAMERA_ROLL);
-        const permissionCamera = replyPermission.permissions.cameraRoll.status;        
-        if(permissionCamera === "denied"){
-            console.log("Debes acceptar permisos, para acceder a la galería");            
-        }else{
-            const result = await ImagePicker.launchImageLibraryAsync({
-                allowsEditing : true,
-                aspect: [4,3]
-            });
-
-            if(!result.cancelled){
-                uploadImage(result.uri,uid);
+            const replyPermission = await Permisssions.askAsync(Permisssions.CAMERA_ROLL);
+            const permissionCamera = replyPermission.permissions.cameraRoll.status;        
+            if(permissionCamera === "denied"){
+                toastRef.current.show("Debes acceptar permisos, para acceder a la galería");            
             }else{
-                console.log("Cerrando galeria de imagenes");
-            }
-        }
+                const result = await ImagePicker.launchImageLibraryAsync({
+                    allowsEditing : true,
+                    aspect: [4,3]
+                });
+
+                if(!result.cancelled){                   
+                        uploadImage(result.uri,uid)
+                        .then(() => {                            
+                            updatePhotoUrl(uid);
+                        });                      
+                }
+            }               
     };
-    const uploadImage  = (uri, nameImage) => {
-        console.log("Uri: "+uri,"nameImage: "+nameImage);
+    const uploadImage  = async (uri, nameImage) => {
+        setTextLoading("Actualziando avatar");
+        setIsVisibleLoading(true);
+        const infoImage = await fetch(uri);
+        const blobImage = await infoImage.blob();
+        const refImage = firebase
+                         .storage()
+                         .ref()
+                         .child('avatars/'+nameImage);
+                         
+        return refImage.put(blobImage);
+
         
+    }
+    const updatePhotoUrl = uid => {
+        firebase
+        .storage()
+        .ref('avatars/'+uid)
+        .getDownloadURL()
+        .then(async result => {
+            const updatedImage = {
+                photoURL: result
+            }             
+            await firebase.auth().currentUser.updateProfile(updatedImage);
+            setReloadDataUser(true);
+            setIsVisibleLoading(false);
+        })
+        .catch(() => {
+            toastRef.current.show("Error al recuperar la imagen del avatar desde el servidor");            
+        });
+
     }
     return (
         <View style={styles.viewUserInfo}>
             <Avatar 
                 rounded
                 size="large"
-                showEditButton
+                showEditButton={providerId === "password" ? true : false}
                 onEditPress={changeAvatar}
                 containerStyle={styles.userInfoAvatar}
                 source={
@@ -54,7 +87,7 @@ export default function InfoUser(props){
                     {displayName ? displayName : "Anónimo"}
                 </Text>
                 <Text>
-                    {email ? email : ''}
+                    {email &&  providerId === "password" ? email : providerId}
                 </Text>
             </View>        
         </View>
