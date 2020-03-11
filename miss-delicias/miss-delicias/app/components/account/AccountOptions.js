@@ -6,7 +6,10 @@ import ChangeNameForm from "./ChangeNameForm";
 import ChangeEmailForm from './ChangeEmailForm';
 import ChangePasswordForm from './ChangePasswordForm';
 
-export default function AccountOptions(){
+export default function AccountOptions(props){
+    
+    const {userInfo,setReloadDataUser,toastRef}=props;
+    console.log(userInfo);
     const [isModalVisible,setIsModalVisible] = useState(false);
     const [renderComponenet, setRenderComponent] = useState(null);
     const menuOptions = [
@@ -17,7 +20,7 @@ export default function AccountOptions(){
             iconColorLeft:"#ccc",
             iconNameRight:"chevron-right",
             iconColorRight:"#ccc",
-            onPress: () =>  selectedComponenet("name")   
+            onPress: () =>  selectedComponent("name")   
         },
         {
             title: "Cambiar Correo electrónico",
@@ -26,7 +29,7 @@ export default function AccountOptions(){
             iconColorLeft:"#ccc",
             iconNameRight:"chevron-right",
             iconColorRight:"#ccc",
-            onPress: () => selectedComponenet("email")     
+            onPress: () => selectedComponent("email")     
         },
         {
             title: "Cambiar Contraseña",
@@ -35,17 +38,31 @@ export default function AccountOptions(){
             iconColorLeft:"#ccc",
             iconNameRight:"chevron-right",
             iconColorRight:"#ccc",
-            onPress: () => selectedComponenet("password")   
+            onPress: () => selectedComponent("password")   
         },
     ];
-    const selectedComponenet = key => {
+    const selectedComponent = key => {
         switch (key) {
             case "name":
-                setRenderComponent(<ChangeNameForm />);
+                setRenderComponent(
+                    <ChangeNameForm 
+                        name={userInfo.displayName}
+                        setIsModalVisible={setIsModalVisible}
+                        setReloadDataUser={setReloadDataUser}
+                        toastRef={toastRef}
+                    />
+                );
                 setIsModalVisible(true);  
                 break;
             case "email":
-                setRenderComponent(<ChangeEmailForm />);
+                setRenderComponent(
+                    <ChangeEmailForm 
+                        email={userInfo.email}
+                        setIsModalVisible={setIsModalVisible}
+                        setReloadDataUser={setReloadDataUser}
+                        toastRef={toastRef}
+                    />
+                );
                 setIsModalVisible(true);  
                 break;
             case "password":

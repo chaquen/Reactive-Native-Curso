@@ -23,13 +23,18 @@ export default function UserLogged(){
 
 	return (
 		<View style={styles.viewUserInfo}>
-			<InfoUser userInfo={userInfo}
-					  setReloadDataUser ={setReloadDataUser} 
-					  toastRef={toastRef}
-					  setIsVisibleLoading={setIsVisibleLoading}
-					  setTextLoading={setTextLoading}
+			<InfoUser 
+				userInfo={userInfo}
+				setReloadDataUser ={setReloadDataUser} 
+				toastRef={toastRef}
+				setIsVisibleLoading={setIsVisibleLoading}
+				setTextLoading={setTextLoading}
 			/>
-			<AccountOptions />
+			<AccountOptions
+					userInfo={userInfo} 
+					setReloadDataUser={setReloadDataUser}
+					toastRef={toastRef}
+			/>
 			<Button 
 				title = "Cerrar Sesión"
 				buttonStyle={styles.btnLogOut}
