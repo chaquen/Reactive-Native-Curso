@@ -3,9 +3,10 @@ export function validateEmail(email){
   	return re.test(String(email).toLocaleLowerCase());
 }
 export function validatePassword(password,confirmPassword){
- 	const valLengthPass=6;
+	let valLengthPass=6;
 	if(password === confirmPassword){
-		return password.length == valLengthPass ? true : false;
+		
+		return password.length >= valLengthPass ? true : false;
 	}
 	return false;
 
