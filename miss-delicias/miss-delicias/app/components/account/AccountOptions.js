@@ -9,7 +9,6 @@ import ChangePasswordForm from './ChangePasswordForm';
 export default function AccountOptions(props){
     
     const {userInfo,setReloadDataUser,toastRef}=props;
-    console.log(userInfo);
     const [isModalVisible,setIsModalVisible] = useState(false);
     const [renderComponenet, setRenderComponent] = useState(null);
     const menuOptions = [

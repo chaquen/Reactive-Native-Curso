@@ -1,10 +1,38 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import React,{ useState, useEffect} from 'react';
+import {StyleSheet,View, Text} from 'react-native';
+import ActionButton from 'react-native-action-button';
+import * as firebase from 'firebase';
 
-export default function Restaurants(){
- return (<View>
+export default function Restaurants(props){
+ const {navigation}=props;
+ const [ user, setUser] = useState(null)
+ useEffect(()=>{
+	firebase.auth().onAuthStateChanged(userInfo => {
+		setUser(userInfo);
+	})
+ },[]);
+ return (
+ 	<View style={styles.viewBody}>
  			<Text>Restaurantes</Text>
- 		</View>
+			{user && <AddRestaurantButton navigation={navigation}/>} 
+ 	</View>
  );
 
 }
+
+function AddRestaurantButton(props){
+	const {navigation}=props;
+ 	
+	return (
+		<ActionButton 
+			buttonColor="#00a680"
+			onPress={()=>navigation.navigate('AddRestaurants')}
+		/>
+	);
+}
+
+const styles = StyleSheet.create({
+	viewBody:{
+		flex:1
+	}
+});

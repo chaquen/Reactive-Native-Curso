@@ -9,8 +9,7 @@ export default function MyAccount(){
 
 	useEffect(()=>{
 		firebase.auth().onAuthStateChanged(user => {
-			!user ? setLogin(false) : setLogin(true); 
-			console.log(user);
+			!user ? setLogin(false) : setLogin(true);			
 		});
 
 	},[]);
