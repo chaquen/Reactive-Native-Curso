@@ -20,7 +20,7 @@ export default function InfoUser(props){
             const replyPermission = await Permisssions.askAsync(Permisssions.CAMERA_ROLL);
             const permissionCamera = replyPermission.permissions.cameraRoll.status;        
             if(permissionCamera === "denied"){
-                toastRef.current.show("Debes acceptar permisos, para acceder a la galería");            
+                toastRef.current.show("Debes acceptar permisos, para acceder a la galería",5000);            
             }else{
                 const result = await ImagePicker.launchImageLibraryAsync({
                     allowsEditing : true,
