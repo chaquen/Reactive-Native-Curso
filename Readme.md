@@ -223,3 +223,12 @@ Cuando queremos acceder a información sensible de nuestros usuarios, debemos so
 Paraa cceder a la galeria de imagenes debemos instalar un paquete [*ImagePicker*](https://docs.expo.io/versions/latest/sdk/imagepicker/) que nos provve dicha funcionalidad, para instalarlo debemos ejecutar el comando:
 
 		expo install expo-image-picker
+
+
+### Agregando [react-native-action-button](https://yarnpkg.com/package/react-native-action-button)
+
+Esta funcionalidad permite agregar un boton flotante, para agregar este paquete use el comando
+
+		yarn add react-native-action-button
+
+
