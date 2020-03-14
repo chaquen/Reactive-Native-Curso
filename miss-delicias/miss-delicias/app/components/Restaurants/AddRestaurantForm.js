@@ -26,7 +26,7 @@ function UploadImage(props){
     let statusPermissionCamera = responsePermission.permissions.cameraRoll.status;
     
     if(statusPermissionCamera === "denied"){
-        toastRef.current.show("¡Debes aceptar permisos para poder agregar imagenes!");
+        toastRef.current.show("¡Debes aceptar permisos para poder agregar imagenes!",5000);
     }else{
         
         let galery = await ImagePicker.launchImageLibraryAsync({
