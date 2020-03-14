@@ -38,11 +38,7 @@ export default function ChangeEmailForm(props){
                 setError({password:"La contraseña no es correcta"});
                 setIsLoading(false);
             });
-        }
-
-
-        console.log("email actualizado");
-        
+        }       
     };
     return (
         <View styles={styles.view}>

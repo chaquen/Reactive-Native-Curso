@@ -4,7 +4,6 @@ import { Button } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
 
 function UserGuest(props){
-	console.log(props);
 	const { navigation } = props;
 	return (
 		<ScrollView style={styles.viewBody} centerContent={true}>
