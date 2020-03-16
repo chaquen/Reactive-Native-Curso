@@ -4,12 +4,16 @@ import { Icon,Avatar, Image,Button } from 'react-native-elements';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker'; 
 
+//Para obtener el tamaño de la pantalla del dispositivo
+const widthScreen = Dimensions.get("screen").width;
+
 export default function AddRestaurantForm(props){
     const {navigation,toastRef,setIsLoading} = props;
     const [imagesSelected,setImagesSelected] = useState([]);
 
     return(
         <ScrollView>
+            <ImageCoverRestaurant imageRestaurant={imagesSelected[0]}/>
             <UploadImage 
                 imagesSelected={imagesSelected}
                 setImagesSelected={setImagesSelected}
@@ -37,6 +41,8 @@ function UploadImage(props){
         if(!galery.cancelled){
             //...[...imagesSelected,galery.uri] => para agregar nuevos elementos sin sobreescribir
             setImagesSelected([...imagesSelected, galery.uri]);
+        }else{
+            toastRef.current.show("¡Para subir imagenes debes aceptar los permisos! \n si deseas cambiar por favor accede a la configuración de tu dispositivo y cambia los permisos de la aplicación",7000);
         }
        
         
@@ -44,7 +50,7 @@ function UploadImage(props){
 };
  
 const removeImage = image => {
-    /* Para evitar que se llame esta función al crear el componente Avatar cada vez que se renderiza,
+    /* Para evitar que se llame esta función al crear el componente Avatar, cada vez que se renderiza,
      se debe invocar como funcion de flecha*/
     let arrayImages = imagesSelected;
     Alert.alert(
@@ -88,7 +94,25 @@ const removeImage = image => {
     </View>
  );
 }
+function ImageCoverRestaurant(props){
+    const  {imageRestaurant} = props;
 
+    return (
+        <View style={styles.viewPhoto}>
+            { imageRestaurant ? (
+                <Image
+                   source = {{uri:imageRestaurant}}
+                   style = {{width: widthScreen, height:200}} 
+                />
+            ) : (
+                <Image 
+                    source = { require("../../../assets/img/no-image-restaurant.png") }
+                    style = {{width: widthScreen, height:200}} 
+                />
+            )}
+        </View>
+    );
+}
 const styles = StyleSheet.create({
     viewImages:{
         flexDirection:"row",
@@ -109,5 +133,10 @@ const styles = StyleSheet.create({
         height:70,
         marginRight:10,
         
+    },
+    viewPhoto:{
+        alignItems:"center",
+        height: 200,
+        marginBottom:20
     }
 });
