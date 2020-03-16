@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text}  from 'react-native';
 import { ListItem }  from 'react-native-elements';
-import ModalInfoUser from './ModalInfoUser';
+import Modal from '../Modal';
 import ChangeNameForm from "./ChangeNameForm";
 import ChangeEmailForm from './ChangeEmailForm';
 import ChangePasswordForm from './ChangePasswordForm';
@@ -102,9 +102,9 @@ export default function AccountOptions(props){
             ))}
            
            {renderComponenet  && (
-            <ModalInfoUser isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible}>
+            <Modal isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible}>
                     {renderComponenet}
-            </ModalInfoUser>
+            </Modal>
            )}            
         </View>
     );

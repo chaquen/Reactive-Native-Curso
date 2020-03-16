@@ -231,4 +231,21 @@ Esta funcionalidad permite agregar un boton flotante, para agregar este paquete 
 
 		yarn add react-native-action-button
 
+##  Agrgar un mapa a nuestra app
 
+Para ello vamos a usar el paquete [map-view](https://docs.expo.io/versions/latest/sdk/map-view/) el cual nos permite interactuar con mapas, para instalarlo debemos usar el comando
+
+		expo install react-native-maps
+
+# Agregar permisos geolocalización en nuestro dispositivo
+
+Debemos usar el paquete [Location](https://docs.expo.io/versions/latest/sdk/location/) que nos permitira acceder a la geolocalización para instalarlo debemos usar el comando
+	
+		expo install expo-location
+De igual manera debemos agreagar en nuestro archivo App.json
+	
+	...
+	},
+	"android":{
+      "permissions":["CAMERA_ROLL","LOCATION"]
+    },

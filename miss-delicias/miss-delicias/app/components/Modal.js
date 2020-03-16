@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Overlay } from  'react-native-elements';
 
-export default function ModalInfoUser(props){
+export default function Modal(props){
     const {isModalVisible, setIsModalVisible, children} = props;
 
     //esta sintaxis aplica si es una sola linea
