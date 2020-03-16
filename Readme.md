@@ -249,3 +249,36 @@ De igual manera debemos agreagar en nuestro archivo App.json
 	"android":{
       "permissions":["CAMERA_ROLL","LOCATION"]
     },
+
+
+## Crear Id's dinamicos, *estos paquetes estan en constante cambio* 
+
+Instalamos paquetes para crear Id's dinamicos, con el pquete [uuid](https://yarnpkg.com/package/uuid) en este caso para las imagenes
+
+		yarn add uuid@~3.3.3
+
+Además de importarse de la siguiente forma 
+
+		import uuid from "uuid/v4";
+Debe usarse 
+
+		uuid();
+
+
+
+## Manejo de Storage con firebase
+
+Accedemos a la [consola](https://console.firebase.google.) de firebase, seleccionamos la opción **Database**, del grupo de opciones que aparece en el costado izquierdo,  en mi caso, estaba activa  la opción DataStore, en este caso pude cambiarla a modo nativo que es como se muestra en el tutorial (video 83 ), de allí se genera una configuración, pero ese cambio solo se puede hacer al inicio, una vez cambiado no se puede volver a realizar cambios  
+
+		rules_version = '2';
+		service cloud.firestore {
+			match /databases/{database}/documents {
+				match /{document=**} {
+					allow read, write: if false;
+				}
+			}
+		}
+
+Se debe cambiar esta linea a valor ***allow read, write: if false;***   =>  ***true*** 
+
+		allow read, write: if true;
