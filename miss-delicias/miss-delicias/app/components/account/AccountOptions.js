@@ -11,35 +11,41 @@ export default function AccountOptions(props){
     const {userInfo,setReloadDataUser,toastRef}=props;
     const [isModalVisible,setIsModalVisible] = useState(false);
     const [renderComponenet, setRenderComponent] = useState(null);
+    
     const menuOptions = [
         {
-            title: "Cambiar Nombre y Apellidos",
+            title: userInfo.providerId === "password" ? "Cambiar Nombre y Apellidos" : "Nombre y Apellidos",
             iconType:"material-comunity",
             iconNameLeft:"account-circle",
             iconColorLeft:"#ccc",
             iconNameRight:"chevron-right",
             iconColorRight:"#ccc",
-            onPress: () =>  selectedComponent("name")   
-        },
-        {
-            title: "Cambiar Correo electrónico",
-            iconType:"material-comunity",
-            iconNameLeft:"mail",
-            iconColorLeft:"#ccc",
-            iconNameRight:"chevron-right",
-            iconColorRight:"#ccc",
-            onPress: () => selectedComponent("email")     
-        },
-        {
-            title: "Cambiar Contraseña",
-            iconType:"material-comunity",
-            iconNameLeft:"lock",
-            iconColorLeft:"#ccc",
-            iconNameRight:"chevron-right",
-            iconColorRight:"#ccc",
-            onPress: () => selectedComponent("password")   
-        },
-    ];
+            onPress: () =>  selectedComponent("name") 
+        }];
+    if(userInfo.providerId === "password"){
+        menuOptions.push(   
+            {
+                title: "Cambiar Correo electrónico",
+                iconType:"material-comunity",
+                iconNameLeft:"mail",
+                iconColorLeft:"#ccc",
+                iconNameRight:"chevron-right",
+                iconColorRight:"#ccc",
+                onPress: () =>  selectedComponent("email") 
+            });
+        menuOptions.push(
+            {
+                title: "Cambiar Contraseña",
+                iconType:"material-comunity",
+                iconNameLeft:"lock",
+                iconColorLeft:"#ccc",
+                iconNameRight:"chevron-right",
+                iconColorRight:"#ccc",
+                onPress: () =>  selectedComponent("password") 
+            });
+    }    
+    
+    
     const selectedComponent = key => {
         switch (key) {
             case "name":
