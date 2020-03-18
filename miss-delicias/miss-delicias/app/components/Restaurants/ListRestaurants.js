@@ -4,7 +4,7 @@ import { Image } from 'react-native-elements';
 import * as firebase from 'firebase';
 
 export default function ListRestaurants(props){
-    const { restaurants, isLoading } = props;   
+    const { restaurants, isLoading,handleLoadMore } = props;   
     return (
         <View>
             {restaurants ? (
@@ -12,15 +12,15 @@ export default function ListRestaurants(props){
                     data={restaurants}
                     renderItem={ restaurant => <Restaurant restaurant={ restaurant } /> }
                     keyExtractor={(item, index) => index.toString()}
-                    //onEndReached={}
+                    onEndReached={handleLoadMore}
                     onEndReachedThreshold={0}
-                    //ListEmptyComponent={}
+                    ListFooterComponent={<FooterList isLoading={isLoading} />}
                 >
 
                 </FlatList>) : (
-                    <View style={styles.loadingRestaurant}>
+                    <View style={styles.loaderRestaurants}>
                         <ActivityIndicator size="large"/>
-                        <Text> Cargando restaurantes </Text>
+                        <Text> Cargando restaurantes... </Text>
                     </View>
                 )}
         </View>
@@ -69,6 +69,25 @@ function Restaurant(props){
 
 }
 
+function FooterList(props){
+    const {isLoading} = props;
+
+    if(isLoading){
+        return (
+            <View style={styles.loadingRestaurants}>
+                <ActivityIndicator size="large"/>
+            </View>
+        );
+    }else{
+        return (
+            <View style={styles.notFondRestaurants}>
+                <Text>No hay mas restaurantes por cargar</Text>
+            </View>
+        );
+    }
+    
+}
+
 const styles = StyleSheet.create({
     loadingRestaurant:{
         marginTop:20,
@@ -96,5 +115,14 @@ const styles = StyleSheet.create({
         paddingTop:2,
         color:"grey",
         width:300
+    },
+    loaderRestaurants:{
+      marginTop:10,
+      marginBottom:10  
+    },
+    notFondRestaurants:{
+      marginTop: 10,
+      marginBottom: 20,
+      alignItems:"center"  
     }
 });
