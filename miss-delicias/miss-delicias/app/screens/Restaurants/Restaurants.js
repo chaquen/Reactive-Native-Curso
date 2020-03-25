@@ -14,7 +14,8 @@ export default function Restaurants(props){
  const [ restaurants,setRestaurants ] = useState([]);
  const [ startRestaurants , setStartRestaurants ]=useState(null);
  const [ isLoading,setIsLoading ] = useState(false);
- const [ totalRestaurants,setTotalRestaurant]= useState(0);
+ const [ totalRestaurants,setTotalRestaurant ]= useState(0);
+ const [ isReloadRestaurants,setIsReloadRestaurants ] = useState(false);
  const limitRestaurants = 8;
   
  useEffect(()=>{
@@ -22,76 +23,85 @@ export default function Restaurants(props){
 		setUser(userInfo);
 	})
  },[]);
- useEffect(()=> {
-	 db.collection("restaurants")
-	   .get()
-	   .then( snap => {
-		setTotalRestaurant(snap.size);
-	   });
-	   
-	 (async () => {
-		const resultRestaurant = [];
-		const restaurants = db
-						  .collection('restaurants')
-						  .orderBy('createAt','desc')
-						  .limit(limitRestaurants);
-		await restaurants.get().then(response => {
-			setStartRestaurants(response.docs[response.docs.length - 1]); 
-			
-			response.forEach(doc => {
-				
-				let restaurant = doc.data();
-				restaurant.id= doc.id;
-				resultRestaurant.push({restaurant});
-			});
-			setRestaurants(resultRestaurant);
-		})
-	 })()
- },[]);
 
- const handleLoadMore = async ()=> {
-	let resultRestaurants=[];
-	restaurant.length < totalRestaurants && setIsLoading(true);
-	let restaurantsDb = db.collection("restaurants")
-							.orderBy("createdAt","desc")
-							.startAfter(startRestaurants.data().createAt)
-							.limit(limitRestaurants);
-	await restaurantsDb.get()
-			.then(response => {
-				if(response.docs.length > 0){
-					setStartRestaurants(response.docs[response.docs.length -1 ]);
-				}else{
-					setIsLoading(false);
-				}
+ useEffect(() => {
+    db.collection("restaurants")
+      .get()
+      .then(snap => {
+        setTotalRestaurants(snap.size);
+      });
 
-				response.forEach( doc => {
-					let restaurant = doc.data();
-					restaurant.id= doc.id;
-					resultRestaurants.push({ restaurants});
-				});
-				setRestaurants([...restaurants, ...resultRestaurants])
-			});
- };
+    (async () => {
+      const resultRestaurants = [];
+
+      const restaurants = db
+        .collection("restaurants")
+        .orderBy("createAt", "desc")
+        .limit(limitRestaurants);
+
+      await restaurants.get().then(response => {
+        setStartRestaurants(response.docs[response.docs.length - 1]);
+
+        response.forEach(doc => {
+          let restaurant = doc.data();
+          restaurant.id = doc.id;
+          resultRestaurants.push({ restaurant });
+        });
+        setRestaurants(resultRestaurants);
+      });
+    })();
+    setIsReloadRestaurants(false);
+  }, [isReloadRestaurants]);
+
+ const handleLoadMore = async () => {
+    const resultRestaurants = [];
+    restaurants.length < totalRestaurants && setIsLoading(true);
+ 
+    const restaurantsDb = db
+      .collection("restaurants")
+      .orderBy("createAt", "desc")
+      .startAfter(startRestaurants.data().createAt)
+      .limit(limitRestaurants);
+ 
+    await restaurantsDb.get().then(response => {
+      if (response.docs.length > 0) {
+        setStartRestaurants(response.docs[response.docs.length - 1]);
+      } else {
+        setIsLoading(false);
+      }
+ 
+      response.forEach(doc => {
+        let restaurant = doc.data();
+        restaurant.id = doc.id;
+        resultRestaurants.push({ restaurant });
+      });
+ 
+      setRestaurants([...restaurants, ...resultRestaurants]);
+    });
+  };
+
  return (
  	<View style={styles.viewBody}>
  			<ListRestaurants 
 				restaurants={restaurants}
 				isLoading={isLoading}
 				handleLoadMore={handleLoadMore}
+				navigation={navigation}
 			 />
-			{user && <AddRestaurantButton navigation={navigation}/>} 
+			{user && <AddRestaurantButton navigation={navigation} 
+						setIsReloadRestaurants={setIsReloadRestaurants}/>} 
  	</View>
  );
 
 }
 
 function AddRestaurantButton(props){
-	const {navigation}=props;
+	const {navigation,setIsReloadRestaurants}=props;
  	
 	return (
 		<ActionButton 
 			buttonColor="#00a680"
-			onPress={()=>navigation.navigate('AddRestaurants')}
+			onPress={()=>navigation.navigate('AddRestaurants',{setIsReloadRestaurants})}
 		/>
 	);
 }
@@ -100,4 +110,4 @@ const styles = StyleSheet.create({
 	viewBody:{
 		flex:1
 	}
-});
+}); 

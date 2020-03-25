@@ -4,17 +4,19 @@ import { Image } from 'react-native-elements';
 import * as firebase from 'firebase';
 
 export default function ListRestaurants(props){
-    const { restaurants, isLoading,handleLoadMore } = props;   
+    const { restaurants, isLoading, handleLoadMore,navigation } = props;   
+       
     return (
-        <View>
+        <View style={styles.viewFlatList}>
             {restaurants ? (
                 <FlatList
                     data={restaurants}
-                    renderItem={ restaurant => <Restaurant restaurant={ restaurant } /> }
+                    renderItem={ restaurant => <Restaurant restaurant={ restaurant } navigation={navigation} /> }
                     keyExtractor={(item, index) => index.toString()}
                     onEndReached={handleLoadMore}
-                    onEndReachedThreshold={0}
+                    onEndReachedThreshold={0.1}
                     ListFooterComponent={<FooterList isLoading={isLoading} />}
+                    
                 >
 
                 </FlatList>) : (
@@ -28,13 +30,13 @@ export default function ListRestaurants(props){
 }
 
 function Restaurant(props){
-    const { restaurant } = props;
-    const {name, address, description, images} = restaurant.item.restaurant;
+    const { restaurant,navigation } = props;
+    const { name, address, description, images } = restaurant.item.restaurant;
     const [imageRestaurant, setImageRestaurant] = useState(null);
-    
-    useEffect(() =>{
+       
+    useEffect( () =>{
         const image = images[0];
-            firebase
+        firebase
             .storage()
             .ref(`restaurants-images/${image}`)
             .getDownloadURL()
@@ -45,7 +47,7 @@ function Restaurant(props){
 
     return (
         <TouchableOpacity 
-            onPress={()=> console.log("Ir al restaurante")}
+            onPress={ () => { navigation.navigate("InfoRestaurant",{restaurant})} }
         >
             <View style={styles.viewRestaurant}>
                 <View style={styles.viewRestaurantImage}>
@@ -53,14 +55,14 @@ function Restaurant(props){
                         resizeMode="cover"
                         source={{ uri: imageRestaurant}}
                         style={styles.imageRestaurant}
-                        PlaceholderContent={<ActivityIndicator color="fff" />}
+                        PlaceholderContent={<ActivityIndicator color="#fff" />}
                     />
                 </View>
                 <View>
                     <Text style={styles.restaurantName}>{name}</Text>
                     <Text style={styles.restaurantAddres}>{address}</Text>
                     <Text styles={styles.restaurantDescription}> 
-                        {description.substr(0,60)}
+                        {description.substr(0,46)}...
                     </Text>
                 </View>
             </View>
@@ -75,7 +77,7 @@ function FooterList(props){
     if(isLoading){
         return (
             <View style={styles.loadingRestaurants}>
-                <ActivityIndicator size="large"/>
+                <ActivityIndicator size="large" color="#fff"/>
             </View>
         );
     }else{
@@ -124,5 +126,8 @@ const styles = StyleSheet.create({
       marginTop: 10,
       marginBottom: 20,
       alignItems:"center"  
+    },
+    viewFlatList:{
+           flex:1 
     }
 });

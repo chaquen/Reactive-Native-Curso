@@ -282,3 +282,14 @@ Accedemos a la [consola](https://console.firebase.google.) de firebase, seleccio
 Se debe cambiar esta linea a valor ***allow read, write: if false;***   =>  ***true*** 
 
 		allow read, write: if true;
+	
+## Agregar un carrousel de imagenes
+
+Agrega un componenete de carrousel para tu aplicación 
+
+		yarn add react-native-banner-carousel
+
+## Abrir un mapa para buscar el camino mas cercano
+	[puedes buscar mas información aquí](https://classic.yarnpkg.com/es-ES/package/react-native-open-maps)
+
+	yarn add react-native-open-maps
