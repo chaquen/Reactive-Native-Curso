@@ -67,6 +67,7 @@ export default function InfoUser(props){
         });
 
     }
+    
     return (
         <View style={styles.viewUserInfo}>
             <Avatar 

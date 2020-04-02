@@ -22,6 +22,8 @@ export default function AddRestaurantForm(props){
     const [imagesSelected,setImagesSelected] = useState([]);
     const [restaurantName, setRestaurantName]=useState("");
     const [restaurantAddress, setRestaurantAddress]=useState("");
+    const [restaurantPhone,setRestaurantPhone] = useState("");
+    const [restaurantWeb,setRestaurantWeb] = useState("");
     const [restaurantDescription, setRestaurantDescription]=useState("");
     const [isVisibleMap, setIsVisibleMap]=useState(false);
     const [locationRestaurant, setLocationResturant]=useState(null);
@@ -40,6 +42,8 @@ export default function AddRestaurantForm(props){
                     db.collection("restaurants").add({
                         name:restaurantName,
                         address:restaurantAddress,
+                        phone:restaurantPhone,
+                        web:restaurantWeb,
                         description:restaurantDescription,
                         location:locationRestaurant,
                         images: arrayImages,
@@ -88,6 +92,10 @@ export default function AddRestaurantForm(props){
                 setRestaurantName={setRestaurantName}
                 setRestaurantAddress={setRestaurantAddress}
                 setRestaurantDescription={setRestaurantDescription}
+                setRestaurantPhone={setRestaurantPhone}
+                setRestaurantWeb={setRestaurantWeb}
+                restaurantPhone={restaurantPhone}
+                restaurantWeb={restaurantWeb}
                 setIsVisibleMap={setIsVisibleMap}
                 locationRestaurant={locationRestaurant}
             />
@@ -207,6 +215,10 @@ function FormAddRestaurante(props){
     const { setRestaurantName,
             setRestaurantAddress,
             setRestaurantDescription,
+            setRestaurantPhone,
+            setRestaurantWeb,
+            restaurantWeb,
+            restaurantPhone,
             setIsVisibleMap,
             locationRestaurant } = props;
     return (
@@ -225,6 +237,26 @@ function FormAddRestaurante(props){
                     name:"google-maps",
                     color: locationRestaurant  ?  "#00a680" : "#c2c2c2",
                     onPress : () => setIsVisibleMap(true)
+                }}
+            />
+            <Input 
+                placeholder = "Teléfono"
+                containerStyle = {styles.input}
+                onChange={e => setRestaurantPhone(e.nativeEvent.text)}
+                rightIcon ={{
+                    type:"material-community",
+                    name:"phone",
+                    color: restaurantPhone ? "#00a680" :"#c2c2c2"
+                }}
+            />
+            <Input 
+                placeholder = "Página web"
+                containerStyle = {styles.input}
+                onChange={ e => setRestaurantWeb(e.nativeEvent.text) }
+                rightIcon={{
+                    type:"material-community",
+                    name:"web",
+                    color: restaurantWeb ? "#00a680" :"#c2c2c2"
                 }}
             />
             <Input 
