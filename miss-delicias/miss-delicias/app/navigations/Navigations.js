@@ -7,6 +7,7 @@ import RestaurantsScreenStacks from './RestaurantsStacks';
 import TopListsScreenStacks from './TopListsStacks';
 import SearchScreenStacks from './SearchStacks';
 import MyAccountScreenStacks from './MyAccountStacks';
+import FavoritesScreenStacks from './FavoritesStacks';
 
 //Here write the stack of navigation
 const NavigationStacks = createBottomTabNavigator({
@@ -15,42 +16,57 @@ const NavigationStacks = createBottomTabNavigator({
 		navigationOptions: () => ({
 			tabBarLabel:'Restaurantes',
 			tabBarIcon: ({ tintColor }) => (
-				<Icon
-					type = 'material-community'
-					name = 'silverware-fork-knife'
-					size = {22}
-					color = {tintColor}
-				/>
+					<Icon
+						type = 'material-community'
+						name = 'silverware-fork-knife'
+						size = {22}
+						color = {tintColor}
+					/>
 
 			)
 		})
 	},
+	Favorites:{
+		screen: FavoritesScreenStacks,
+		navigationOptions:()=>({
+				tabBarLabel:'Favoritos',
+				tabBarIcon: ({ tintColor })=>(
+					<Icon 
+						type = 'material-community'
+						name = 'heart-outline'
+						size = {22}
+						color = {tintColor}
+					/>
+				)
+			}
+		)
+	},
 	TopLists:{
 		screen: TopListsScreenStacks,
 		navigationOptions: () => ({
-			tabBarLabel:'Los mejores',
-			tabBarIcon: ({ tintColor }) => (
-				<Icon
-					type = 'material-community'
-					name = 'star-outline'
-					size = {22}
-					color = {tintColor}
-				/>
-
-			)
-		})
+				tabBarLabel:'Los mejores',
+				tabBarIcon: ({ tintColor }) => (
+					<Icon
+						type = 'material-community'
+						name = 'star-outline'
+						size = {22}
+						color = {tintColor}
+					/>
+				)
+			}
+		)
 	},
 	Search:{
 		screen: SearchScreenStacks,
 		navigationOptions: () => ({
 			tabBarLabel:'Buscar',
 			tabBarIcon: ({ tintColor }) => (
-				<Icon
-					type = 'material-community'
-					name = 'magnify'
-					size = {22}
-					color = {tintColor}
-				/>
+					<Icon
+						type = 'material-community'
+						name = 'magnify'
+						size = {22}
+						color = {tintColor}
+					/>
 
 			)
 		})
@@ -60,12 +76,12 @@ const NavigationStacks = createBottomTabNavigator({
 		navigationOptions: () => ({
 			tabBarLabel:'Mi cuenta',
 			tabBarIcon: ({ tintColor }) => (
-				<Icon
-					type = 'material-community'
-					name = 'home-account'
-					size = {22}
-					color = {tintColor}
-				/>
+					<Icon
+						type = 'material-community'
+						name = 'home-account'
+						size = {22}
+						color = {tintColor}
+					/>
 
 			)
 		})
@@ -74,7 +90,7 @@ const NavigationStacks = createBottomTabNavigator({
 {
 	//Routes Managment AQUI SE MARCA EN QUE SCREEN SE QUIERE ARRANCAR 
 	initialRouteName:"Restaurants",
-	order:["Restaurants","TopLists","Search","Account"],
+	order:["Restaurants","Favorites","TopLists","Search","Account"],
 	tabBarOptions:{
 		inactiveTintColor: "#646464",
 		activeTintColor: "#00a680"
