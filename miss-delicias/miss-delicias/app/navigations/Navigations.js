@@ -89,7 +89,7 @@ const NavigationStacks = createBottomTabNavigator({
 },
 {
 	//Routes Managment AQUI SE MARCA EN QUE SCREEN SE QUIERE ARRANCAR 
-	initialRouteName:"Restaurants",
+	initialRouteName:"TopLists",
 	order:["Restaurants","Favorites","TopLists","Search","Account"],
 	tabBarOptions:{
 		inactiveTintColor: "#646464",

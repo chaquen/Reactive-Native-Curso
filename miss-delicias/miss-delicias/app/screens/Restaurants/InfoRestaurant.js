@@ -14,7 +14,7 @@ const screenWidth= Dimensions.get("window").width;
 
 export default function InfoRestaurant(props){
     const { navigation } = props;
-    const { restaurant }  = navigation.state.params.restaurant.item;
+    const { restaurant }  = navigation.state.params;
     const [ imagesRestaurants, setImagesRestaurants ] = useState([]);
     const [ rating, setRating] = useState(restaurant.rating);
     const [isFavorite, setIsFavorite]=useState(false);
@@ -38,8 +38,6 @@ export default function InfoRestaurant(props){
         })();
     },[]);
     useEffect(()=>{
-        console.log(restaurant.id);
-        console.log(firebase.auth().currentUser.uid);
         
         db.collection("favorites")
         .where("idRestaurant","==",restaurant.id)
@@ -78,7 +76,7 @@ export default function InfoRestaurant(props){
                        toastRef.current.show("Restaurante, "+restaurant.name+" \n eliminado de la lista de favoritos");
                 })
                 .catch(()=>{
-                    toastRef.current.show("NO se ha podido eliminar el restaurante de la lista de favoritos, intentelo más tarde");
+                    toastRef.current.show("No se ha podido eliminar el restaurante de la lista de favoritos, intentelo más tarde");
                 });
             });
         });
@@ -104,8 +102,7 @@ export default function InfoRestaurant(props){
             <TitleRestaurant 
                 name={restaurant.name} 
                 description={restaurant.description} 
-                rating={rating} 
-                
+                rating={rating}                 
             />
             <RestaurantInformation 
                 location={restaurant.location} 
@@ -147,13 +144,16 @@ function TitleRestaurant(props){
 function RestaurantInformation(props){
     
     const { location,name, address, phone, web } = props;
+    
     const openURL = (e,url) => {
         console.log("abrir navegador: "+ url);
         //const supportUrl = await Linking.canOpenURL();
     };
+    
     const openPhone = (e,phoneNumber) => {
         console.log("abrir teléfono: "+ phoneNumber);
     };
+    
     const listInfo = [
         {
             text:address,
