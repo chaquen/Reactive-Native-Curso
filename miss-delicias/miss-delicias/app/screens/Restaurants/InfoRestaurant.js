@@ -18,6 +18,11 @@ export default function InfoRestaurant(props){
     const [ imagesRestaurants, setImagesRestaurants ] = useState([]);
     const [ rating, setRating] = useState(restaurant.rating);
     const [isFavorite, setIsFavorite]=useState(false);
+    const [userLogged,setUserLogged]=useState(false);
+
+    firebase.auth().onAuthStateChanged(user => {
+        user ? setUserLogged(true) : setUserLogged(false);
+    });
     const toastRef= useRef();
     
     useEffect(()=> {
@@ -39,26 +44,36 @@ export default function InfoRestaurant(props){
     },[]);
     useEffect(()=>{
         
-        db.collection("favorites")
-        .where("idRestaurant","==",restaurant.id)
-        .where("idUser","==",firebase.auth().currentUser.uid)
-        .get()
-        .then(response => {            
-            response.docs.length === 1 ? setIsFavorite(true): null;
-        });
+        if(userLogged){
+            db.collection("favorites")
+            .where("idRestaurant","==",restaurant.id)
+            .where("idUser","==",firebase.auth().currentUser.uid)
+            .get()
+            .then(response => {            
+                response.docs.length === 1 ? setIsFavorite(true): null;
+            });
+        }
 
     },[]);
     const addFavorite = async () => {
-        const payLoad ={
-            idUser:firebase.auth().currentUser.uid,
-            idRestaurant:restaurant.id
-        };
-        await db.collection("favorites").add(payLoad).then(()=>{
-            setIsFavorite(true);
-            toastRef.current.show("Restaurante, "+restaurant.name+" \n añadido a la lista de favoritos");
-        }).catch(()=>{
-            toastRef.current.show("Error al agregar el restaurante a favoritos, intentelo más tarde");
-        });
+        
+        if(!userLogged){
+            toastRef.current.show("Para agregar este restaurante a tus favoritos debes iniciar sesión",
+            5000);
+        }else{
+            const payLoad ={
+                idUser:firebase.auth().currentUser.uid,
+                idRestaurant:restaurant.id
+            };
+            await db.collection("favorites").add(payLoad).then(()=>{
+                setIsFavorite(true);
+                toastRef.current.show("Restaurante, "+restaurant.name+" \n añadido a la lista de favoritos");
+            }).catch(()=>{
+                toastRef.current.show("Error al agregar el restaurante a favoritos, intentelo más tarde");
+            });
+        }
+
+        
         
     };
     const removeFavorite =  () => {
