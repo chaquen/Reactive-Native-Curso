@@ -312,3 +312,20 @@ Para ello debemos ir a la carpeta ***assets*** y cambiar el archivo ***icon.png*
 	IOS : NO acepta transaparencias en el icono
 	ANDROID: SI acepta tranparencias en el icono
 	Como recomendación debe ser un icono SIN tranparencias
+	Formato PNG
+
+## Cambiar el splash split
+El splash split es la imagen que aparece al entrar o recargar la app, en desarrollo aparece una imagen con un cruadrado.
+
+Se recomienda que la imagen tenga la especificación de 
+	1242 x 2036 pixeles
+	espacio de color RGB 
+	Formato PNG
+
+## Cambiar el background color de la aplicación
+Para ello debe ir a el archivo ***app.json*** y cambiar el valor ***baackgroundColor** en este caso vamos a usar el color [#00a680](https://www.colorhexa.com/00a680)
+
+	"splash": {
+      ...
+      "backgroundColor": "#00a680"
+    },
