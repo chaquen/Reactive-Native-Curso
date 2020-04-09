@@ -302,3 +302,13 @@ Para ello vamos a usar el paquete [firesql](https://yarnpkg.com/package/firesql)
 ## Para retarasar renderizado  [use debounce](https://yarnpkg.com/package/use-debounce)
 
 	yarn add use-debounce
+
+## Cambiar el icono de la aplicación
+
+Para ello debemos ir a la carpeta ***assets*** y cambiar el archivo ***icon.png***, se debe tener en cuenta que este archivo debe tener las siguientes especificaciones:
+
+	Proporción 192 x 192 pixeles
+	espacio de color RGB
+	IOS : NO acepta transaparencias en el icono
+	ANDROID: SI acepta tranparencias en el icono
+	Como recomendación debe ser un icono SIN tranparencias
