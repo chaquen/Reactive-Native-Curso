@@ -293,3 +293,12 @@ Agrega un componenete de carrousel para tu aplicación
 	[puedes buscar mas información aquí](https://classic.yarnpkg.com/es-ES/package/react-native-open-maps)
 
 	yarn add react-native-open-maps
+
+## Buscar en Firebase
+Para ello vamos a usar el paquete [firesql](https://yarnpkg.com/package/firesql)
+
+	yarn add firesql
+
+## Para retarasar renderizado  [use debounce](https://yarnpkg.com/package/use-debounce)
+
+	yarn add use-debounce

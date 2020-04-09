@@ -23,11 +23,6 @@ function Restaurant(props){
     const { name, description, images, rating } = restaurant.item;
     const  [imageRestaurant, setImageRestaurant] = useState(null);
     const [iconColor,setIconColor] =  useState("#000");
-    console.log("============");
-    
-    console.log(restaurant.item);
-    
-    console.log("============");
     
     useEffect(() => {
         setIconColor(colors[restaurant.index]);    
@@ -109,6 +104,5 @@ const styles = StyleSheet.create({
     description:{
         color:"grey",
         marginTop:0,
-        
     }
 });
